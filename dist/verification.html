@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <title>Verification</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <!-- Simple line icons-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css"
+        rel="stylesheet" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+        rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+      <!-- Navigation-->
+      <a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
+      <nav id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+              <li class="sidebar-brand"><a href="#page-top">Coming soon</a></li>
+  
+          </ul>
+      </nav>
+      <!-- Header-->
+      <header class="masthead d-flex align-items-center">
+        <div class="container px-4 px-lg-5 text-center">
+            <h1 class="mb-1 ">Generator</h1>
+            <h3 class="mb-5"><em>A Free Generator</em></h3>
+            <a class="btn btn-primary btn-xl" href="#about">Gen now!</a>
+            <div id="info">
+                
+            </div>
+            <a style="height: 150px;" id="login" style="display: none;"
+                href="https://discord.com/api/oauth2/authorize?client_id=883048541088522301&redirect_uri=http%3A%2F%2Flocalhost%3A53134&response_type=code&scope=identify"><b><div style="height: max-content;">Identify
+                    Yourself</div></b></a>
+            <script>
+                window.onload = () => {
+                    const fragment = new URLSearchParams(window.location.hash.slice(1));
+                    const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
+            
+                    if (!accessToken) {
+                        return document.getElementById('login').style.display = 'block';
+                    }
+            
+                    fetch('https://discord.com/api/users/@me', {
+                        headers: {
+                            authorization: `${tokenType} ${accessToken}`,
+                        },
+                    })
+                        .then(result => result.json())
+                        .then(response => {
+                            const { username, discriminator } = response;
+                            document.getElementById('info').innerText += ` ${username}#${discriminator}`;
+                        })
+                        .catch(console.error);
+                };
+            </script>
+        </div>
+        </div>
+         
+      </header>
+
+
+     
+
+     
+     
+      <!-- Scroll to Top Button-->
+      <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
+      <!-- Bootstrap core JS-->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+      <!-- Core theme JS-->
+      <script src="js/scripts.js"></script>  
+
+</body>
+
+</html>
+
