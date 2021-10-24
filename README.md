@@ -1,0 +1,1 @@
+This is a basic javascript project using my skills in Spanish(Latin America)
